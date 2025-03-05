@@ -5,6 +5,13 @@ from random import randrange
 import pandas as pd
 import streamlit as st
 
+st.set_page_config(
+    page_title="#UNGA79",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+
 """
 df is a pd.DataFrame with the following columns:
     - country
@@ -17,12 +24,6 @@ df is a pd.DataFrame with the following columns:
 """
 
 # TODO Add line chart with HDI vs other countries
-
-st.set_page_config(
-    page_title="#UNGA79",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
 
 
 @st.cache_data
