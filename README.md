@@ -33,7 +33,7 @@ flowchart LR
 * [ ] **Inference Generation**: Use LLMs to generate inferences based on the speech content, such as predicting potential consequences of policy decisions oranticipating international reactions.
 * [ ] **Speech Emotional Arc Analysis**: Analyze the emotional tone of the speech over time to identify potential shifts or arcs in sentiment. This can provide insight into the leader's communication strategy or audience engagement.
 
-## Usage
+## Usage locally
 
 ```bash
 # Clone this repository
@@ -41,8 +41,9 @@ git clone https://github.com/darenasc/unga79.git
 # Change directory to repository
 cd unga79
 # Install dependencies
-pipenv install Pipfile
-pipenv install -d Pipfile
+pip install pipenv
+python3 -m pipenv install Pipfile
+python3 -m pipenv install -d Pipfile
 # Activate Python environment
 pipenv shell
 # Run the streamlit app
