@@ -1,3 +1,10 @@
+import sqlite3
+from pathlib import Path
+from random import randrange
+
+import pandas as pd
+import streamlit as st
+
 """
 df is a pd.DataFrame with the following columns:
     - country
@@ -9,12 +16,6 @@ df is a pd.DataFrame with the following columns:
     - haiku
 """
 
-import time
-
-import streamlit as st
-
-from unga79 import database as dbase
-
 # TODO Add line chart with HDI vs other countries
 
 st.set_page_config(
@@ -22,15 +23,34 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
-st.title("#UNGA79")
 
-df = dbase.select_country()
+
+@st.cache_data
+def get_data(db: Path):
+    with sqlite3.connect(db) as conn:
+        cursor = conn.cursor()
+        rows = cursor.execute("""SELECT * FROM countries;""").fetchall()
+        column_names = [x[0] for x in cursor.description]
+        cursor.close()
+
+    df = pd.DataFrame(rows, columns=column_names)
+    return df
+
+
+df = get_data(Path(__file__).absolute().parent / "countries.db")
+
+if "random_initial_country" not in st.session_state:
+    st.session_state.random_initial_country = randrange(len(df))
+    st.session_state.disabled = False
 
 with st.sidebar:
     country_selection = st.selectbox(
-        "Country", df["country"].sort_values().to_list()
+        "Country",
+        df["country"].sort_values().to_list(),
+        index=st.session_state.random_initial_country,
     )  # type:ignore
 
+st.title(f"#UNGA79 {country_selection}")
 
 col1, col2 = st.columns(2)
 
