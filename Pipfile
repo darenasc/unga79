@@ -8,6 +8,7 @@ pipfile = "*"
 ipykernel = "*"
 jupyter = "*"
 streamlit = "*"
+unga79 = {file = ".", editable = true}
 
 [dev-packages]
 pylint = "*"
