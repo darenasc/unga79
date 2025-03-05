@@ -12,8 +12,12 @@ st.set_page_config(
 )
 
 
-"""
-df is a pd.DataFrame with the following columns:
+# TODO Add line chart with HDI vs other countries
+
+
+@st.cache_data
+def get_data(db: Path):
+    """Returns a pd.DataFrame with the following columns:
     - country
     - url
     - full_speech
@@ -21,13 +25,7 @@ df is a pd.DataFrame with the following columns:
     - countries_mentioned
     - risks
     - haiku
-"""
-
-# TODO Add line chart with HDI vs other countries
-
-
-@st.cache_data
-def get_data(db: Path):
+    """
     with sqlite3.connect(db) as conn:
         cursor = conn.cursor()
         rows = cursor.execute("""SELECT * FROM countries;""").fetchall()

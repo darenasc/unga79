@@ -19,6 +19,7 @@ flowchart LR
     risks --> streamlit(Streamlit App)
     other_countries --> streamlit(Streamlit App)
 ```
+<img src="figures/streamlit-mark-color.png" alt="drawing" width="25"/>[ See the app](https://unga79.streamlit.app)
 
 ![](figures/screenshot.png)
 
