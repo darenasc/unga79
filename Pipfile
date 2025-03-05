@@ -4,12 +4,23 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pipfile = "*"
 ipykernel = "*"
+jupyter = "*"
+streamlit = "*"
 
 [dev-packages]
-black = {extras = ["jupyter"], version = "*"}
-mypy = "*"
 pylint = "*"
+black = "*"
+mypy = "*"
+isort = "*"
+pandas = "*"
+requests = "*"
+youtube-transcript-api = "*"
+python-dotenv = "*"
+tqdm = "*"
+langchain-community = "*"
+langchain-core = "*"
 
 [requires]
 python_version = "3.10"

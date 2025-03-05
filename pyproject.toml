@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Project"
+name = "UNGA79"
 dynamic = ["version"]
 authors = [
   { name="Diego Arenas", email="darenasc@gmail.com" }
@@ -11,7 +11,7 @@ authors = [
 maintainers = [
   { name="Diego Arenas", email="darenasc@gmail.com" }
 ]
-description = "Project."
+description = "Speech analysis from UNGA79"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -30,8 +30,8 @@ database = [
   "psycopg2-binary",
 ]
 [project.urls]
-Homepage = "https://github.com/darenasc/"
-Issues = "https://github.com/darenasc/issues"
+Homepage = "https://github.com/darenasc/unga79"
+Issues = "https://github.com/darenasc/unga79/issues"
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -127,4 +127,6 @@ disable = '''print-statement,
         print-statement,
         import-outside-toplevel,
         import-error,
+        C0301,
+        E0611,
 '''
