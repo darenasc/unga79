@@ -34,10 +34,10 @@ flowchart LR
 * [x] List of countries mentioned and sentiment
 * [x] Risks mentioned in the speech
 * [x] Top 3 most important ideas mentioned
+* [x] Advice in Yoda style
 * [ ] Emotion detection: speech, such as happiness, sadness, anger, or excitement
 * [ ] **Inference Generation**: Use LLMs to generate inferences based on the speech content, such as predicting potential consequences of policy decisions oranticipating international reactions.
 * [ ] **Speech Emotional Arc Analysis**: Analyze the emotional tone of the speech over time to identify potential shifts or arcs in sentiment. This can provide insight into the leader's communication strategy or audience engagement.
-* [ ] Advice in Yoda style
 
 ## Usage locally
 
@@ -54,6 +54,44 @@ python3 -m pipenv install -d Pipfile
 pipenv shell
 # Run the streamlit app
 streamlit run app/app.py
+```
+
+### TTS
+
+> Note: Installing the TTS model is not needed to interact with the app as the 
+    audio files are included in the repository in [app/audio/](app/audio/).
+
+For the voice generation I'm using [F5-TTS](https://github.com/SWivid/F5-TTS).
+Generated a sample of 10 seconds with the voice of Carl Sagan and passed the 
+texts generate from the LLM.
+
+The following is the process to install and run the script to generate the 
+audios.
+
+```bash
+# Clone the repository
+git clone https://github.com/SWivid/F5-TTS.git
+cd F5-TTS
+
+# Run the following two brew lines only if you are using an Apple Silicon chip
+brew update
+brew install ffmpeg
+
+# Install torch in a second environment
+pipenv install torch torchaudio
+pipenv install -e .
+
+# Launch the gradio GUI
+f5-tts_infer-gradio
+
+# Or run shell commands replacing the arguments between "<>" to generate an audio
+f5-tts_infer-cli \
+--model "F5-TTS" \
+--ref_audio "</YOUR/REFERENCE/AUDIO.wav>" \
+--ref_text "<The text in the reference audio to create the voice.>" \
+--gen_file "</THE/FILE/WITH/THE/CONTENT/TO/VOICED.txt>" \
+--output_dir "</OUTPUT/DIR>" \
+--output_file "<OUTPUT_FILE.wav>" 
 ```
 
 ## Resources
