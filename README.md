@@ -1,9 +1,11 @@
 # UN General Assermbly 79 Speeches
 
-The app analyses the speech of each country at the #UNGA79 in 2024. It presents 
-a summary of the speech, a list of risks identied in the the speech, what other 
-coutries were mentioned and the sentiment in the sentences and a haiku based on 
-the speech.
+The app analyses the speech of each country at the #UNGA79 in 2024. It presents:
+- A summary of the speech
+- A list of risks identied in the the speech
+- Other coutries mentioned and the sentiment towards them 
+- A haiku 
+- An audio with Yoda's advice in Carl Sagan's voice
 
 The process is the following:
 
@@ -14,10 +16,13 @@ flowchart LR
     transcripts --> haiku(LLM haiku)
     transcripts --> risks(LLM risks)
     transcripts --> other_countries(LLM countries mentioned)
+    transcripts --> yoda(LLM yoda's advice)
     summary --> streamlit(Streamlit App)
     haiku --> streamlit(Streamlit App)
     risks --> streamlit(Streamlit App)
     other_countries --> streamlit(Streamlit App)
+    yoda --> TTS(TTS audio)
+    TTS --> streamlit(Streamlit App)
 ```
 <img src="figures/streamlit-mark-color.png" alt="drawing" width="25"/>[ See the app](https://unga79.streamlit.app)
 
@@ -32,6 +37,7 @@ flowchart LR
 * [ ] Emotion detection: speech, such as happiness, sadness, anger, or excitement
 * [ ] **Inference Generation**: Use LLMs to generate inferences based on the speech content, such as predicting potential consequences of policy decisions oranticipating international reactions.
 * [ ] **Speech Emotional Arc Analysis**: Analyze the emotional tone of the speech over time to identify potential shifts or arcs in sentiment. This can provide insight into the leader's communication strategy or audience engagement.
+* [ ] Advice in Yoda style
 
 ## Usage locally
 

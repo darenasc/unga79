@@ -62,9 +62,24 @@ with col1:
 with col2:
     st.video(df[df["country"] == country_selection]["url"].values[0])
 
-    if df[df["country"] == country_selection]["haiku"].values[0]:
-        st.header("Haiku")
-        st.text(df[df["country"] == country_selection]["haiku"].values[0])
+    col3, col4 = st.columns(2)
+
+    with col3:
+        if df[df["country"] == country_selection]["haiku"].values[0]:
+            st.header("Haiku")
+            st.text(df[df["country"] == country_selection]["haiku"].values[0])
+
+    with col4:
+        if (
+            Path(__file__).absolute().parent / "audio" / f"{country_selection}_yoda.wav"
+        ).exists():
+            st.header("Yoda & Sagan")
+            st.audio(
+                Path(__file__).absolute().parent
+                / "audio"
+                / f"{country_selection}_yoda.wav",
+                format="audio/wav",
+            )
 
 
 if df[df["country"] == country_selection]["risks"].values[0]:
