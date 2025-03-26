@@ -21,6 +21,7 @@ QUERIES = {
     "insert": """INSERT INTO countries (country, url, full_speech) VALUES (?, ?, ?);""",
     "delete": """DELETE FROM countries where country = ?""",
     "select": """SELECT * FROM countries;""",
+    "check": """SELECT * FROM countries where country = ?;""",
     "drop": """DROP TABLE countries;""",
 }
 
@@ -33,7 +34,18 @@ def create_db(db: str | Path = DB):
         cursor.close()
 
 
-def insert(country: str, url: str, speech: str, db: str | Path = DB):
+def insert(
+    country: str, url: str, speech: str, db: str | Path = DB, overwrite: bool = False
+):
+    if not overwrite:
+        with sqlite3.connect(db) as conn:
+            cursor = conn.cursor()
+            cursor.execute(QUERIES["check"], (country,))
+            rows = cursor.fetchall()
+            if len(rows) > 0:
+                cursor.close()
+                return
+
     with sqlite3.connect(db) as conn:
         cursor = conn.cursor()
         cursor.execute(QUERIES["delete"], (country,))
